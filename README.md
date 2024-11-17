@@ -60,7 +60,7 @@ La arquitectura implementada sigue el patrón **MVC** (Modelo-Vista-Controlador)
 
 ### **Script de Base de Datos**
 El script de creación de la base de datos se encuentra en el archivo `script.bd`, ubicado en el directorio raíz del proyecto.
-Recuerda crear usuarios de prueba y además que estos sean administradores para que la aplicación funcione correctamente.
+Recuerda crear usuarios de prueba y además que estos sean administradores para que la aplicación funcione correctamente. **Usa el api para crear el usuario y de esa forma hashear la clave**.
 
 ### **Demo**
 Actualmente, **no hay una demo desplegada** para esta solución.  
