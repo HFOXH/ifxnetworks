@@ -62,6 +62,12 @@ La arquitectura implementada sigue el patrón **MVC** (Modelo-Vista-Controlador)
 El script de creación de la base de datos se encuentra en el archivo `script.bd`, ubicado en el directorio raíz del proyecto.
 Recuerda crear usuarios de prueba y además que estos sean administradores para que la aplicación funcione correctamente. **Usa el api para crear el usuario y de esa forma hashear la clave**.
 
+### Manual de Usuario:
+![image](https://github.com/user-attachments/assets/c9299596-d5d7-4441-84d1-ded6d0232cfc)
+La aplicación es bastante fácil de usar y ofrece una experiencia intuitiva. En el menú principal encontrarás las opciones Employees y Entities, desde donde puedes listar los elementos disponibles.
+
+Si deseas editar, eliminar o agregar un nuevo elemento, primero debes iniciar sesión utilizando el botón Login (que significa "inicio de sesión" en español). Una vez autenticado, tendrás acceso completo a estas funcionalidades. ¡Así de sencillo!
+
 ### **Demo**
 Actualmente, **no hay una demo desplegada** para esta solución.  
 
