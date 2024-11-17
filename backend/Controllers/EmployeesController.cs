@@ -1,7 +1,9 @@
 ﻿using backend.Context;
 using backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -42,6 +44,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Employee>> PostEmployee([FromBody] Employee employee)
         {
             if (employee == null)
@@ -62,6 +65,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutEmployee(Guid id, [FromBody] Employee updatedEmployee)
         {
             if (updatedEmployee == null)
@@ -94,6 +98,7 @@ namespace backend.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteEmployee(Guid id)
         {
             var employee = await _context.Employees.FindAsync(id);

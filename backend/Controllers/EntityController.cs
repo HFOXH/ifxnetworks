@@ -1,7 +1,9 @@
 ﻿using backend.Context;
 using backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace backend.Controllers
 {
@@ -32,6 +34,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Entity>> PostEntity([FromBody] Entity entity)
         {
             if (entity == null)
@@ -46,6 +49,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutEntity(Guid id, [FromBody] Entity updatedEntity)
         {
             if (updatedEntity == null)
@@ -69,6 +73,7 @@ namespace backend.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Entity>> DeleteEntity(Guid id) {
             var entity = await _context.Entities.FirstOrDefaultAsync(e => e.EntityId == id);
             if (entity == null) { 
