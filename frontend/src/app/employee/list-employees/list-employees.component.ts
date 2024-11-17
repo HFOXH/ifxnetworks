@@ -40,4 +40,8 @@ export class ListEmployeesComponent implements OnInit{
       }
     );
   }
+
+  editEmployee(id: string): void{
+    window.location.href = "/edit_employee/"+id;
+  }
 }

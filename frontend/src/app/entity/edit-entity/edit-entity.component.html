@@ -1,0 +1,43 @@
+<div class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Edit Entity</h2>
+      
+      <form [formGroup]="entityForm" (ngSubmit)="editEntity()">
+        <div class="mb-4">
+          <label for="entityName" class="block text-sm font-medium text-gray-700">Entity Name</label>
+          <input 
+            type="text" 
+            id="entityName" 
+            formControlName="entityName" 
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div *ngIf="entityForm.get('entityName')?.invalid && entityForm.get('entityName')?.touched" class="text-red-500 text-sm">
+            Name is required.
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea 
+            id="description" 
+            formControlName="description" 
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+          <div *ngIf="entityForm.get('description')?.invalid && entityForm.get('description')?.touched" class="text-red-500 text-sm">
+            Description is required.
+          </div>
+        </div>
+  
+        <div class="mt-6">
+          <button 
+            type="submit" 
+            [disabled]="entityForm.invalid"
+            class="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            Edit Entity
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

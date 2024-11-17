@@ -1,4 +1,4 @@
-<div class="bg-gray-100 flex items-center justify-center h-screen flex-col">
+<div class="bg-gray-100 flex items-center justify-center h-screen flex-col pt-24">
     <a href="/add_entity"
         class="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
         Add new Entity
@@ -13,7 +13,7 @@
                     <p class="text-sm text-gray-600">{{ entity.description }}</p>
                 </div>
                 <div class="flex space-x-2">
-                    <button
+                    <button (click)="editEntity(entity.entityId)"
                         class="px-4 py-2 bg-yellow-500 text-white text-sm font-medium rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <span class="mdi mdi-pen"></span>
                     </button>

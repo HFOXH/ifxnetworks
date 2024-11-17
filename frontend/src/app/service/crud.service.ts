@@ -70,7 +70,7 @@ export class CrudService {
   // Actualizar una entidad
   updateEntity(entityId: string, dataEntity: Entity): Observable<Entity> {
     const headers = this.getHeaders();
-    return this.clientHttp.put<Entity>(`${this.url_api}/Entity/${entityId}`, dataEntity, { headers });
+    return this.clientHttp.put<Entity>(`${this.url_api}/Entity/${entityId}`, dataEntity);
   }
 
   // Eliminar una entidad

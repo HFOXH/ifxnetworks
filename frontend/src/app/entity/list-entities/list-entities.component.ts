@@ -40,4 +40,8 @@ export class ListEntitiesComponent implements OnInit{
     );
   }
 
+  editEntity(id: string): void{
+    window.location.href = "/edit_entity/"+id;
+  }
+
 }
