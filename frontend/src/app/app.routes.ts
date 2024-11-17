@@ -9,6 +9,7 @@ import { EditEntityComponent } from './entity/edit-entity/edit-entity.component'
 import { RegisterComponent } from './user/register/register.component';
 
 export const routes: Routes = [
+    {path: '', pathMatch: 'full',redirectTo: '/employees'},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'employees', component: ListEmployeesComponent},
