@@ -13,10 +13,7 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public EmployeesController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        public EmployeesController(ApplicationDbContext context) {  _context = context; }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
