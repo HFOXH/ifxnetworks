@@ -13,7 +13,6 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        // Constructor that injects the DbContext
         public EmployeesController(ApplicationDbContext context)
         {
             _context = context;
@@ -22,44 +21,96 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-            // Retrieve the list of employees from the database
-            var employees = await _context.Employees
-                                          .Include(e => e.Entity)  // Optional: Include the related Entity data if needed
-                                          .ToListAsync();
+            var employees = await _context.Employees.ToListAsync();
 
-            // If no employees found, return a 404 NotFound
             if (employees == null || employees.Count == 0)
             {
                 return NotFound();
             }
 
-            // Return the list of employees
             return Ok(employees);
         }
 
-        // GET api/<EmployeesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Employee>> GetEmployee(Guid id)
         {
-            return "value";
+            var employee = await _context.Employees.FirstOrDefaultAsync(e => e.EmployeeId == id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(employee);
         }
 
-        // POST api/<EmployeesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Employee>> PostEmployee([FromBody] Employee employee)
         {
+            if (employee == null)
+            {
+                return BadRequest("Employee data is required.");
+            }
+
+            var entityExists = await _context.Entities.AnyAsync(e => e.EntityId == employee.EntityId);
+            if (!entityExists)
+            {
+                return NotFound($"Entity with ID {employee.EntityId} not found.");
+            }
+
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetEmployee), new { id = employee.EmployeeId }, employee);
         }
 
-        // PUT api/<EmployeesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> PutEmployee(Guid id, [FromBody] Employee updatedEmployee)
         {
+            if (updatedEmployee == null)
+            {
+                return BadRequest("Employee data is required.");
+            }
+
+            var existingEmployee = await _context.Employees.FindAsync(id);
+
+            if (existingEmployee == null)
+            {
+                return NotFound();
+            }
+
+            var entityExists = await _context.Entities.AnyAsync(e => e.EntityId == updatedEmployee.EntityId);
+            if (!entityExists)
+            {
+                return NotFound($"Entity with ID {updatedEmployee.EntityId} not found.");
+            }
+
+            existingEmployee.FirstName = updatedEmployee.FirstName;
+            existingEmployee.LastName = updatedEmployee.LastName;
+            existingEmployee.DateOfBirth = updatedEmployee.DateOfBirth;
+            existingEmployee.JobTitle = updatedEmployee.JobTitle;
+            existingEmployee.EntityId = updatedEmployee.EntityId;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
-        // DELETE api/<EmployeesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> DeleteEmployee(Guid id)
         {
+            var employee = await _context.Employees.FindAsync(id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
+
     }
 }

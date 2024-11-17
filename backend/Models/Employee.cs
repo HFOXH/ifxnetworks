@@ -23,6 +23,5 @@ namespace backend.Models
 
         // Foreign key to Entity
         public Guid EntityId { get; set; }
-        public Entity Entity { get; set; }
     }
 }
